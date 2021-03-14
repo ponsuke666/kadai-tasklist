@@ -1,5 +1,25 @@
-<h1>id: <%= @task.id %>のタスク編集ページ</h1>
+<% if logged_in? %>
+  <div class="row">
+    <%= form_with(model: @task, local: true) do |f| %>
+      <div class="form-group">
+        <%= f.label :status, 'ステータス' %>
+        <%= f.text_field :status, class: 'form-control'%>
+      </div>
+    
+      <div class="form-group">
+        <%= f.label :content, 'タスク' %>
+        <%= f.text_field :content, class: 'form-control'%>
+      </div>
+    
+      <%= f.submit '編集する', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  </div>
 
-<%= render 'form', task: @task %>
-
-<%= link_to 'タスク一覧に戻る', tasks_path %>
+<% else %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>Welcome to Tasklist</h1>
+      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+    </div>
+  </div>
+<% end %>
